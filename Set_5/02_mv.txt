@@ -1,0 +1,33 @@
+Command: mv
+
+Purpose:
+Move or rename files/directories.
+
+Syntax:
+mv [options] source destination
+mv [options] source... directory
+
+Examples:
+  mv o.txt n.txt - Rename
+  mv f.txt folder1 - Move to existing folder1
+  mv f.txt folder1/newf - Move and rename
+  mv f1 f2 folder1 - Move several files
+  mv oldf newf - Rename directory (names as handwritten)
+  mv -i f.txt folder1 - Ask before overwrite
+  mv -f f.txt folder1 - Overwrite without asking
+
+Expected behavior:
+The move/rename commands are silent on success. n.txt replaces the source name o.txt; folder1 contains f.txt and newf. Multiple examples are independent; re-create a moved source before reusing its name. Keep -i for an overwrite demonstration if needed; no -f is needed here.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-mv.XXXXXX")
+cd "$practice"
+touch o.txt f.txt
+mkdir folder1
+mv o.txt n.txt
+mv f.txt folder1
+# Re-create f.txt because the previous command moved it.
+touch f.txt
+mv f.txt folder1/newf
+ls n.txt folder1

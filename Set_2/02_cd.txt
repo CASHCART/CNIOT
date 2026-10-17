@@ -1,0 +1,30 @@
+Command: cd
+
+Purpose:
+Change the current shell working directory.
+
+Syntax:
+cd [directory]
+
+Examples:
+  cd dirname - Enter dirname
+  cd or cd ~ - Go home (two alternatives, not one literal command)
+  cd .. - Parent directory
+  cd ../.. - Two levels up
+  cd /path/to/dir - Absolute path, illustrative placeholder in record
+  cd "My" - Quoted directory name shown in record
+  cd - - Return to previous directory
+
+Expected behavior:
+Ordinary cd succeeds silently. First pwd ends /dirname; next pwd is its parent. cd - returns to dirname and prints its path. Record /path/to/dir is a placeholder: replace it with an existing path, not an assumed real folder.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-cd.XXXXXX")
+cd "$practice"
+mkdir dirname
+cd dirname
+pwd
+cd ..
+pwd
+cd -

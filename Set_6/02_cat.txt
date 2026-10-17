@@ -1,0 +1,29 @@
+Command: cat
+
+Purpose:
+Display or concatenate file contents.
+
+Syntax:
+cat [options] [file...]
+
+Examples:
+  cat file.txt - Display file
+  cat > file.txt - Type new content; shell truncates/creates file
+  cat >> file.txt - Append typed content
+  cat f1 f2 > newf - Combine two files
+  cat -n f.txt - Number lines
+
+Expected behavior:
+cat file.txt prints CN. The concatenation writes CN then IoT on separate lines to newf and prints nothing. cat -n shows two numbered lines. For the record interactive examples, run cat > file.txt or cat >> file.txt, type text, then Ctrl+D. > replaces; >> appends. These are shell redirections, not cat options.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-cat.XXXXXX")
+cd "$practice"
+printf 'CN\n' > file.txt
+printf 'CN\n' > f1
+printf 'IoT\n' > f2
+printf 'CN\nIoT\n' > f.txt
+cat file.txt
+cat f1 f2 > newf
+cat -n f.txt

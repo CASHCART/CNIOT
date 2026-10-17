@@ -1,0 +1,25 @@
+Command: mkdir
+
+Purpose:
+Create directories.
+
+Syntax:
+mkdir [options] directory...
+
+Examples:
+  mkdir myfolder - One directory
+  mkdir f1 f2 f3 - Several directories
+  mkdir -p f1/f2/f3 - Create parents too
+  mkdir -v newfolder - Print creation message
+
+Expected behavior:
+First three commands are silent on success. Last prints a created-directory message. Existing parent f1 is accepted with -p. Plain mkdir reports an error if a target already exists. Spelling is normalized to mkdir.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-mkdir.XXXXXX")
+cd "$practice"
+mkdir myfolder
+mkdir f1 f2 f3
+mkdir -p f1/f2/f3
+mkdir -v newfolder

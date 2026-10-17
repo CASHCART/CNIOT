@@ -1,0 +1,26 @@
+Command: touch
+
+Purpose:
+Create missing empty files or update existing timestamps.
+
+Syntax:
+touch [options] file...
+
+Examples:
+  touch file1.txt - Create one empty file if missing
+  touch f1.txt f2.txt - Create multiple files
+  touch eg.txt - Update timestamps, or create if missing
+  touch path/to/file.txt - Parent path must already exist
+
+Expected behavior:
+touch normally prints nothing. Missing files are created; existing files retain contents and get updated timestamps. mkdir -p is prerequisite setup for the path example. The handwritten existing-filename example looks eg.txt; that name has no special meaning.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-touch.XXXXXX")
+cd "$practice"
+touch file1.txt
+touch f1.txt f2.txt
+mkdir -p path/to
+touch path/to/file.txt
+ls file1.txt f1.txt f2.txt path/to/file.txt

@@ -1,0 +1,29 @@
+Command: ls
+
+Purpose:
+List directory contents.
+
+Syntax:
+ls [options] [file_or_directory]
+
+Examples:
+  ls - Basic list
+  ls -l - Long format: permissions, owner, size, time
+  ls -a - Include hidden files
+  ls -la - Long format plus hidden files
+  ls -lh - Human-readable sizes
+  ls -lt - Sort modification time, newest first
+  ls -R - List subdirectories recursively
+
+Expected behavior:
+Lists file.txt and folder1; -a also shows .hidden, . and ..; -l shows varying metadata. The record says ls -t opens the last edited file; correction: it sorts by modification time.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-ls.XXXXXX")
+cd "$practice"
+touch file.txt .hidden
+mkdir folder1
+ls
+ls -a
+ls -l

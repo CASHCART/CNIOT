@@ -1,0 +1,31 @@
+Command: rm
+
+Purpose:
+Remove files or directory trees.
+
+Syntax:
+rm [options] file...
+
+Examples:
+  rm f1.txt - Remove one file
+  rm f1 f2 - Remove several files
+  rm -r folder1 - Remove directory and contents
+  rm -rf folder1 - Recursive removal without missing-file complaints/prompts
+  rm -i f1.txt - Ask before removal
+  rm f*.txt - Remove matching filenames
+
+Expected behavior:
+rm -i asks whether to remove f1.txt; y deletes it, n keeps it. Other successful operations are silent. rm -r deletes the practice folder and inside.txt. The record -rf and wildcard examples are listed above but need not be executed. rm does not use a recycle bin.
+
+Execution commands:
+Run in Bash/Linux/Raspberry Pi. This setup uses a fresh practice directory:
+practice=$(mktemp -d "$HOME/cniot-rm.XXXXXX")
+cd "$practice"
+touch f1.txt
+mkdir folder1
+touch folder1/inside.txt
+rm -i f1.txt
+# Type y and press Enter.
+rm -r folder1
+touch f1 f2
+rm f1 f2
