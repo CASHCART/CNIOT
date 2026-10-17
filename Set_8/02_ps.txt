@@ -1,0 +1,35 @@
+Command: ps
+
+Purpose:
+View information about running processes.
+Record: Linux command14, page5; Record Pics/photo at8.42.14PM (8).
+
+Syntax:
+ps [options]
+
+Examples:
+  ps             - Show processes selected for the current shell/user terminal.
+  ps -e          - Show all processes.
+  ps -ef         - Show all processes in full format.
+  ps -u "$USER"  - Show processes for the current user.
+  ps aux         - Show all processes with user-oriented details, including
+                   CPU and memory usage.
+
+Expected behavior:
+Prints a process table. Default columns include PID, TTY, TIME and CMD.
+Full or user-oriented formats add information such as USER/UID, PPID, CPU
+and memory fields. Process IDs, counts and usage change between runs.
+The record writes ps -u without a username; the example above supplies the
+required user argument. Additional handwritten combined hierarchy/detail
+flags are unclear, so they are not claimed as exact recovered examples.
+
+Execution commands:
+Run these in a Linux/Raspberry Pi terminal; no test files are needed:
+ps
+ps -e
+ps -ef
+ps -u "$USER"
+ps aux
+
+On a minimal Debian/Raspberry Pi OS installation, only if ps is missing:
+sudo apt install procps
