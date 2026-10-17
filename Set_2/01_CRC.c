@@ -3,46 +3,50 @@
 #include <stdio.h>
 #include <string.h>
 
+void divide(char t[], char g[]) {
+    int i, j, n = strlen(t), k = strlen(g);
+
+    for (i = 0; i <= n - k; i++)
+        if (t[i] == '1')
+            for (j = 0; j < k; j++)
+                t[i+j] = (t[i+j] == g[j]) ? '0' : '1';
+}
+
 int main() {
-    char d[100], g[20], t[120], r[120];
-    int i, j, n, k, e = 0;
+    char d[100], g[20], t[120], r[120], c[120];
+    int i, n, k, e = 0;
 
     printf("Enter data bits: ");
-    scanf("%s", d);
+    scanf("%99s", d);
     printf("Enter generator bits: ");
-    scanf("%s", g);
+    scanf("%19s", g);
 
     n = strlen(d);
     k = strlen(g);
 
     strcpy(t, d);
-    for (i = 0; i < k - 1; i++) t[n+i] = '0';
+    for (i = 0; i < k-1; i++) t[n+i] = '0';
     t[n+k-1] = '\0';
 
-    for (i = 0; i <= n-k; i++)
-        if (t[i] == '1')
-            for (j = 0; j < k; j++)
-                t[i+j] = (t[i+j] == g[j]) ? '0' : '1';
+    divide(t, g);
+    strcpy(c, d);
+    strcpy(c+n, t+n);
 
     printf("CRC remainder: %s\n", t+n);
-
-    strcpy(d+n, t+n);
-    printf("Transmitted codeword: %s\n", d);
+    printf("Transmitted codeword: %s\n", c);
 
     printf("Enter received codeword: ");
-    scanf("%s", r);
+    scanf("%119s", r);
+
     strcpy(t, r);
+    divide(t, g);
 
-    for (i = 0; i <= (int)strlen(r)-k; i++)
-        if (t[i] == '1')
-            for (j = 0; j < k; j++)
-                t[i+j] = (t[i+j] == g[j]) ? '0' : '1';
+    printf("Receiver remainder: %s\n", t+strlen(r)-(k-1));
 
-    printf("Receiver remainder: %s\n", t+strlen(r)-k+1);
-
-    for (i = strlen(r)-k+1; i < (int)strlen(r); i++)
+    for (i = strlen(r)-(k-1); i < (int)strlen(r); i++)
         if (t[i] == '1') e = 1;
 
     printf("%s\n", e ? "Error detected." : "No error detected.");
+
     return 0;
 }
